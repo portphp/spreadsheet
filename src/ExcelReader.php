@@ -30,16 +30,16 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Port\Reader\CountableReader;
 
 /**
- * Reads Excel files with the help of PHPExcel
+ * Reads Spreadsheet files with the help of PHPSpreadsheet
  *
- * PHPExcel must be installed.
+ * PHPSpreadsheet must be installed.
  *
  * @author David de Boer <david@ddeboer.nl>
  *
  * @see http://phpexcel.codeplex.com/
- * @see https://github.com/logiQ/PHPExcel
+ * @see https://github.com/logiQ/PHPSpreadsheet
  */
-class ExcelReader implements CountableReader, \SeekableIterator
+class SpreadsheetReader implements CountableReader, \SeekableIterator
 {
     /**
      * @var array
@@ -70,7 +70,7 @@ class ExcelReader implements CountableReader, \SeekableIterator
 
     // phpcs:disable Generic.Files.LineLength.MaxExceeded
     /**
-     * @param \SplFileObject $file            Excel file
+     * @param \SplFileObject $file            Spreadsheet file
      * @param int            $headerRowNumber Optional number of header row
      * @param int            $activeSheet     Index of active sheet to read from
      * @param bool           $readOnly        If set to false, the reader take care of the excel formatting (slow)

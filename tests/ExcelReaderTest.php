@@ -24,12 +24,12 @@ SOFTWARE.
  */
 namespace Port\Spreadsheet\Tests;
 
-use Port\Spreadsheet\ExcelReader;
+use Port\Spreadsheet\SpreadsheetReader;
 
 /**
  * {@inheritDoc}
  */
-class ExcelReaderTest extends \PHPUnit_Framework_TestCase
+class SpreadsheetReaderTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * {@inheritDoc}
@@ -47,7 +47,7 @@ class ExcelReaderTest extends \PHPUnit_Framework_TestCase
     public function testCountWithHeaders()
     {
         $file   = new \SplFileObject(__DIR__.'/fixtures/data_column_headers.xlsx');
-        $reader = new ExcelReader($file, 0);
+        $reader = new SpreadsheetReader($file, 0);
         $this->assertEquals(3, $reader->count());
     }
 
@@ -57,7 +57,7 @@ class ExcelReaderTest extends \PHPUnit_Framework_TestCase
     public function testCountWithoutHeaders()
     {
         $file   = new \SplFileObject(__DIR__.'/fixtures/data_no_column_headers.xls');
-        $reader = new ExcelReader($file);
+        $reader = new SpreadsheetReader($file);
         $this->assertEquals(3, $reader->count());
     }
 
@@ -67,7 +67,7 @@ class ExcelReaderTest extends \PHPUnit_Framework_TestCase
     public function testCustomColumnHeadersWithHeaders()
     {
         $file   = new \SplFileObject(__DIR__.'/fixtures/data_column_headers.xlsx');
-        $reader = new ExcelReader($file, 0);
+        $reader = new SpreadsheetReader($file, 0);
 
         $this->assertEquals(
             array(
@@ -144,7 +144,7 @@ class ExcelReaderTest extends \PHPUnit_Framework_TestCase
     public function testCustomColumnHeadersWithoutHeaders()
     {
         $file   = new \SplFileObject(__DIR__.'/fixtures/data_no_column_headers.xls');
-        $reader = new ExcelReader($file);
+        $reader = new SpreadsheetReader($file);
 
         $reader->setColumnHeaders(
             array(
@@ -191,7 +191,7 @@ class ExcelReaderTest extends \PHPUnit_Framework_TestCase
     public function testIterateWithHeaders()
     {
         $file   = new \SplFileObject(__DIR__.'/fixtures/data_column_headers.xlsx');
-        $reader = new ExcelReader($file, 0);
+        $reader = new SpreadsheetReader($file, 0);
 
         $actualData   = array();
         $expectedData = array(
@@ -225,7 +225,7 @@ class ExcelReaderTest extends \PHPUnit_Framework_TestCase
     public function testIterateWithoutHeaders()
     {
         $file   = new \SplFileObject(__DIR__.'/fixtures/data_no_column_headers.xls');
-        $reader = new ExcelReader($file);
+        $reader = new SpreadsheetReader($file);
 
         $actualData   = array();
         $expectedData = array(
@@ -247,7 +247,7 @@ class ExcelReaderTest extends \PHPUnit_Framework_TestCase
     public function testMaxRowNumb()
     {
         $file   = new \SplFileObject(__DIR__.'/fixtures/data_no_column_headers.xls');
-        $reader = new ExcelReader($file, null, null, null, 1000);
+        $reader = new SpreadsheetReader($file, null, null, null, 1000);
         $this->assertEquals(3, $reader->count());
 
         // Without $maxRows, this faulty file causes OOM because of an extremely
@@ -255,7 +255,7 @@ class ExcelReaderTest extends \PHPUnit_Framework_TestCase
         $file = new \SplFileObject(__DIR__.'/fixtures/data_extreme_last_row.xlsx');
 
         $max    = 5;
-        $reader = new ExcelReader($file, null, null, null, $max);
+        $reader = new SpreadsheetReader($file, null, null, null, $max);
         $this->assertEquals($max, $reader->count());
     }
 
@@ -265,10 +265,10 @@ class ExcelReaderTest extends \PHPUnit_Framework_TestCase
     public function testMultiSheet()
     {
         $file         = new \SplFileObject(__DIR__.'/fixtures/data_multi_sheet.xls');
-        $sheet1reader = new ExcelReader($file, null, 0);
+        $sheet1reader = new SpreadsheetReader($file, null, 0);
         $this->assertEquals(3, $sheet1reader->count());
 
-        $sheet2reader = new ExcelReader($file, null, 1);
+        $sheet2reader = new SpreadsheetReader($file, null, 1);
         $this->assertEquals(2, $sheet2reader->count());
     }
 
@@ -278,7 +278,7 @@ class ExcelReaderTest extends \PHPUnit_Framework_TestCase
     public function testSeekWithHeaders()
     {
         $file   = new \SplFileObject(__DIR__.'/fixtures/data_column_headers.xlsx');
-        $reader = new ExcelReader($file, 0);
+        $reader = new SpreadsheetReader($file, 0);
 
         // TODO: Check if row 0 should return the header row if headers are enabled.
         // Row 0 returns the header row as data and indexes.
@@ -333,7 +333,7 @@ class ExcelReaderTest extends \PHPUnit_Framework_TestCase
     public function testSeekWithoutHeaders()
     {
         $file   = new \SplFileObject(__DIR__.'/fixtures/data_no_column_headers.xls');
-        $reader = new ExcelReader($file);
+        $reader = new SpreadsheetReader($file);
 
         $row = $reader->getRow(2);
         $this->assertEquals(

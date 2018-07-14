@@ -24,12 +24,12 @@ SOFTWARE.
  */
 namespace Port\Spreadsheet\Tests;
 
-use Port\Spreadsheet\ExcelReaderFactory;
+use Port\Spreadsheet\SpreadsheetReaderFactory;
 
 /**
  * {@inheritDoc}
  */
-class ExcelReaderFactoryTest extends \PHPUnit_Framework_TestCase
+class SpreadsheetReaderFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * {@inheritDoc}
@@ -46,12 +46,12 @@ class ExcelReaderFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetReader()
     {
-        $factory = new ExcelReaderFactory();
+        $factory = new SpreadsheetReaderFactory();
         $reader  = $factory->getReader(new \SplFileObject(__DIR__.'/fixtures/data_column_headers.xlsx'));
-        $this->assertInstanceOf('\Port\Excel\ExcelReader', $reader);
+        $this->assertInstanceOf('\Port\Spreadsheet\SpreadsheetReader', $reader);
         $this->assertCount(4, $reader);
 
-        $factory = new ExcelReaderFactory(0);
+        $factory = new SpreadsheetReaderFactory(0);
         $reader  = $factory->getReader(new \SplFileObject(__DIR__.'/fixtures/data_column_headers.xlsx'));
         $this->assertCount(3, $reader);
     }

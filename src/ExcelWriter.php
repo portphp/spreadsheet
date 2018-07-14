@@ -29,11 +29,11 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Port\Writer;
 
 /**
- * Writes to an Excel file
+ * Writes to an Spreadsheet file
  *
  * @author David de Boer <david@ddeboer.nl>
  */
-class ExcelWriter implements Writer
+class SpreadsheetWriter implements Writer
 {
     /**
      * @var Spreadsheet
@@ -68,7 +68,7 @@ class ExcelWriter implements Writer
     /**
      * @param \SplFileObject $file             File
      * @param string         $sheet            Sheet title (optional)
-     * @param string         $type             Excel file type (defaults to Xlsx)
+     * @param string         $type             Spreadsheet file type (defaults to Xlsx)
      * @param bool           $prependHeaderRow
      */
     public function __construct(\SplFileObject $file, $sheet = null, $type = 'Xlsx', $prependHeaderRow = false)

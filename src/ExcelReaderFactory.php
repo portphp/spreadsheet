@@ -27,11 +27,11 @@ namespace Port\Spreadsheet;
 use Port\Reader\ReaderFactory;
 
 /**
- * Factory that creates ExcelReaders
+ * Factory that creates SpreadsheetReaders
  *
  * @author David de Boer <david@ddeboer.nl>
  */
-class ExcelReaderFactory implements ReaderFactory
+class SpreadsheetReaderFactory implements ReaderFactory
 {
     /**
      * @var int
@@ -56,10 +56,10 @@ class ExcelReaderFactory implements ReaderFactory
     /**
      * @param \SplFileObject $file
      *
-     * @return ExcelReader
+     * @return SpreadsheetReader
      */
     public function getReader(\SplFileObject $file)
     {
-        return new ExcelReader($file, $this->headerRowNumber, $this->activeSheet);
+        return new SpreadsheetReader($file, $this->headerRowNumber, $this->activeSheet);
     }
 }
