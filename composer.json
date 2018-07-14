@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Port\\spreadsheet\\": "src/"
+            "Port\\Spreadsheet\\": "src/"
         }
     },
     "require-dev": {
@@ -38,7 +38,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Port\\spreadsheet\\Tests\\": "tests/"
+            "Port\\Spreadsheet\\Tests\\": "tests/"
         }
     },
     "extra": {
