@@ -1,0 +1,5 @@
+suites:
+  library_suite:
+    namespace: Port\Spreadsheet
+    psr4_prefix: Port\Spreadsheet
+formatter.name: pretty
