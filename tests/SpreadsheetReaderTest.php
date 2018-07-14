@@ -62,7 +62,7 @@ class SpreadsheetReaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
+     * @author  Derek Chafin <infomaniac50@gmail.com>
      */
     public function testCustomColumnHeadersWithHeaders()
     {
@@ -139,7 +139,7 @@ class SpreadsheetReaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
+     * @author  Derek Chafin <infomaniac50@gmail.com>
      */
     public function testCustomColumnHeadersWithoutHeaders()
     {
@@ -186,7 +186,7 @@ class SpreadsheetReaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
+     * @author  Derek Chafin <infomaniac50@gmail.com>
      */
     public function testIterateWithHeaders()
     {
@@ -220,7 +220,7 @@ class SpreadsheetReaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
+     * @author  Derek Chafin <infomaniac50@gmail.com>
      */
     public function testIterateWithoutHeaders()
     {
@@ -273,7 +273,7 @@ class SpreadsheetReaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
+     * @author  Derek Chafin <infomaniac50@gmail.com>
      */
     public function testSeekWithHeaders()
     {
@@ -328,7 +328,7 @@ class SpreadsheetReaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     *
+     * @author  Derek Chafin <infomaniac50@gmail.com>
      */
     public function testSeekWithoutHeaders()
     {

@@ -122,6 +122,8 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
      * If a header row has been set, an associative array will be returned
      *
      * @return array|null
+     *
+     * @author  Derek Chafin <infomaniac50@gmail.com>
      */
     public function current()
     {
