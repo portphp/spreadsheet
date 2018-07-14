@@ -32,8 +32,6 @@ use Port\Reader\CountableReader;
 /**
  * Reads Spreadsheet files with the help of PHPSpreadsheet
  *
- * PHPSpreadsheet must be installed.
- *
  * @author David de Boer <david@ddeboer.nl>
  *
  * @see http://phpexcel.codeplex.com/
