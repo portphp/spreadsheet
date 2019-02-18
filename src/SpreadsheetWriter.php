@@ -38,7 +38,7 @@ class SpreadsheetWriter implements Writer
     /**
      * @var Spreadsheet
      */
-    protected $excel;
+    protected $spreadsheet;
 
     /**
      * @var string
@@ -86,7 +86,7 @@ class SpreadsheetWriter implements Writer
      */
     public function finish()
     {
-        $writer = IOFactory::createWriter($this->excel, $this->type);
+        $writer = IOFactory::createWriter($this->spreadsheet, $this->type);
         $writer->save($this->filename);
     }
 
@@ -99,16 +99,16 @@ class SpreadsheetWriter implements Writer
     {
         $reader = IOFactory::createReader($this->type);
         if ($reader->canRead($this->filename)) {
-            $this->excel = $reader->load($this->filename);
+            $this->spreadsheet = $reader->load($this->filename);
         } else {
-            $this->excel = new Spreadsheet();
+            $this->spreadsheet = new Spreadsheet();
         }
 
         if (null !== $this->sheet) {
-            if (!$this->excel->sheetNameExists($this->sheet)) {
-                $this->excel->createSheet()->setTitle($this->sheet);
+            if (!$this->spreadsheet->sheetNameExists($this->sheet)) {
+                $this->spreadsheet->createSheet()->setTitle($this->sheet);
             }
-            $this->excel->setActiveSheetIndexByName($this->sheet);
+            $this->spreadsheet->setActiveSheetIndexByName($this->sheet);
         }
     }
 
@@ -127,7 +127,7 @@ class SpreadsheetWriter implements Writer
             $headers = array_keys($item);
 
             for ($i = 0; $i < $count; $i++) {
-                $this->excel->getActiveSheet()->setCellValueByColumnAndRow($i + 1, $this->row, $headers[$i]);
+                $this->spreadsheet->getActiveSheet()->setCellValueByColumnAndRow($i + 1, $this->row, $headers[$i]);
             }
             $this->row++;
         }
@@ -135,7 +135,7 @@ class SpreadsheetWriter implements Writer
         $values = array_values($item);
 
         for ($i = 0; $i < $count; $i++) {
-            $this->excel->getActiveSheet()->setCellValueByColumnAndRow($i + 1, $this->row, $values[$i]);
+            $this->spreadsheet->getActiveSheet()->setCellValueByColumnAndRow($i + 1, $this->row, $values[$i]);
         }
 
         $this->row++;

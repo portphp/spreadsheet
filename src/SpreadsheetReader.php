@@ -34,8 +34,7 @@ use Port\Reader\CountableReader;
  *
  * @author David de Boer <david@ddeboer.nl>
  *
- * @see http://phpexcel.codeplex.com/
- * @see https://github.com/logiQ/PHPSpreadsheet
+ * @see https://github.com/PHPOffice/PhpSpreadsheet
  */
 class SpreadsheetReader implements CountableReader, \SeekableIterator
 {
@@ -71,7 +70,7 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
      * @param \SplFileObject $file            Spreadsheet file
      * @param int            $headerRowNumber Optional number of header row
      * @param int            $activeSheet     Index of active sheet to read from
-     * @param bool           $readOnly        If set to false, the reader take care of the excel formatting (slow)
+     * @param bool           $readOnly        If set to false, the reader take care of the spreadsheet formatting (slow)
      * @param int            $maxRows         Maximum number of rows to read
      */
     public function __construct(\SplFileObject $file, $headerRowNumber = null, $activeSheet = null, $readOnly = true, $maxRows = null)
@@ -79,21 +78,21 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
         // phpcs:enable Generic.Files.LineLength.MaxExceeded
         $reader = IOFactory::createReaderForFile($file->getPathName());
         $reader->setReadDataOnly($readOnly);
-        /** @var Spreadsheet $excel */
-        $excel = $reader->load($file->getPathname());
+        /** @var Spreadsheet $spreadsheet */
+        $spreadsheet = $reader->load($file->getPathname());
 
         if (null !== $activeSheet) {
-            $excel->setActiveSheetIndex($activeSheet);
+            $spreadsheet->setActiveSheetIndex($activeSheet);
         }
 
         /** @var Worksheet $sheet */
-        $sheet = $excel->getActiveSheet();
+        $sheet = $spreadsheet->getActiveSheet();
 
         if ($maxRows && $maxRows < $sheet->getHighestDataRow()) {
             $maxColumn       = $sheet->getHighestDataColumn();
             $this->worksheet = $sheet->rangeToArray('A1:'.$maxColumn.$maxRows);
         } else {
-            $this->worksheet = $excel->getActiveSheet()->toArray();
+            $this->worksheet = $spreadsheet->getActiveSheet()->toArray();
         }
 
         if (null !== $headerRowNumber) {
@@ -127,7 +126,7 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
     {
         $row = $this->worksheet[$this->pointer];
 
-        // If the excel file has column headers, use them to construct an associative
+        // If the spreadsheet file has column headers, use them to construct an associative
         // array for the columns in this line
         if (count($this->columnHeaders) === count($row)) {
             return array_combine(array_values($this->columnHeaders), $row);
