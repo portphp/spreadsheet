@@ -128,7 +128,7 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
 
         // If the spreadsheet file has column headers, use them to construct an associative
         // array for the columns in this line
-        if (count($this->columnHeaders) === count($row)) {
+        if (!empty($this->columnHeaders) && count($this->columnHeaders) === count($row)) {
             return array_combine(array_values($this->columnHeaders), $row);
         }
 
