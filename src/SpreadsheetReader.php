@@ -103,7 +103,7 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         $count = count($this->worksheet);
         if (null !== $this->headerRowNumber) {
@@ -122,7 +122,7 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
      *
      * @author  Derek Chafin <infomaniac50@gmail.com>
      */
-    public function current()
+    public function current(): mixed
     {
         $row = $this->worksheet[$this->pointer];
 
@@ -141,7 +141,7 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
      *
      * @return array
      */
-    public function getColumnHeaders()
+    public function getColumnHeaders(): array
     {
         return $this->columnHeaders;
     }
@@ -153,7 +153,7 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
      *
      * @return array
      */
-    public function getRow($number)
+    public function getRow(int $number): array
     {
         $this->seek($number);
 
@@ -163,9 +163,9 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
     /**
      * Return the key of the current element
      *
-     * @return int
+     * @return int|null scalar on success, or null on failure.
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->pointer;
     }
@@ -175,7 +175,7 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
      *
      * @return void Any returned value is ignored.
      */
-    public function next()
+    public function next(): void
     {
         $this->pointer++;
     }
@@ -189,7 +189,7 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
      *
      * @return void Any returned value is ignored.
      */
-    public function rewind()
+    public function rewind(): void
     {
         if (null === $this->headerRowNumber) {
             $this->pointer = 0;
@@ -207,7 +207,7 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
      *
      * @return void Any returned value is ignored.
      */
-    public function seek($pointer)
+    public function seek(int $pointer): void
     {
         $this->pointer = $pointer;
     }
@@ -219,7 +219,7 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
      *
      * @return void Any returned value is ignored.
      */
-    public function setColumnHeaders(array $columnHeaders)
+    public function setColumnHeaders(array $columnHeaders): void
     {
         $this->columnHeaders = $columnHeaders;
     }
@@ -243,7 +243,7 @@ class SpreadsheetReader implements CountableReader, \SeekableIterator
      * @return bool The return value will be casted to boolean and then evaluated.
      * Returns true on success or false on failure.
      */
-    public function valid()
+    public function valid(): bool
     {
         return isset($this->worksheet[$this->pointer]);
     }
