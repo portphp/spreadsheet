@@ -24,6 +24,7 @@ SOFTWARE.
  */
 namespace Port\Spreadsheet;
 
+use Port\Reader;
 use Port\Reader\ReaderFactory;
 
 /**
@@ -34,20 +35,20 @@ use Port\Reader\ReaderFactory;
 class SpreadsheetReaderFactory implements ReaderFactory
 {
     /**
-     * @var int
+     * @var int|null
      */
     protected $activeSheet;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $headerRowNumber;
 
     /**
-     * @param int $headerRowNumber
-     * @param int $activeSheet
+     * @param int|null $headerRowNumber
+     * @param int|null $activeSheet
      */
-    public function __construct($headerRowNumber = null, $activeSheet = null)
+    public function __construct(?int $headerRowNumber = null, ?int $activeSheet = null)
     {
         $this->headerRowNumber = $headerRowNumber;
         $this->activeSheet     = $activeSheet;
@@ -58,7 +59,7 @@ class SpreadsheetReaderFactory implements ReaderFactory
      *
      * @return SpreadsheetReader
      */
-    public function getReader(\SplFileObject $file)
+    public function getReader(\SplFileObject $file): Reader
     {
         return new SpreadsheetReader($file, $this->headerRowNumber, $this->activeSheet);
     }
