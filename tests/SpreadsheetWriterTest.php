@@ -151,16 +151,13 @@ class SpreadsheetWriterTest extends \PHPUnit\Framework\TestCase
     public function testWriteItemWithoutSheetTitle()
     {
         $path = tempnam(sys_get_temp_dir(), 'portphp');
-        $outputFile = new \SplFileObject($path);
-        $writer     = new SpreadsheetWriter($outputFile);
+        $writer = new SpreadsheetWriter(new \SplFileObject($path, 'w'));
 
         $writer->prepare();
-
         $writer->writeItem(array('first', 'last'));
-
         $writer->finish();
 
-        $this->assertFileExists($path);
-        $this->assertGreaterThan(0, filesize($path));
+        $excel = IOFactory::load($path);
+        $this->assertEquals(array('first', 'last'), $excel->getActiveSheet()->toArray()[0]);
     }
 }
