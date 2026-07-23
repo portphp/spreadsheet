@@ -29,12 +29,12 @@ use Port\Spreadsheet\SpreadsheetReader;
 /**
  * {@inheritDoc}
  */
-class SpreadsheetReaderTest extends \PHPUnit_Framework_TestCase
+class SpreadsheetReaderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         if (!extension_loaded('zip')) {
             $this->markTestSkipped();
@@ -247,7 +247,7 @@ class SpreadsheetReaderTest extends \PHPUnit_Framework_TestCase
     public function testMaxRowNumb()
     {
         $file   = new \SplFileObject(__DIR__.'/fixtures/data_no_column_headers.xls');
-        $reader = new SpreadsheetReader($file, null, null, null, 1000);
+        $reader = new SpreadsheetReader($file, null, null, true, 1000);
         $this->assertEquals(3, $reader->count());
 
         // Without $maxRows, this faulty file causes OOM because of an extremely
@@ -255,7 +255,7 @@ class SpreadsheetReaderTest extends \PHPUnit_Framework_TestCase
         $file = new \SplFileObject(__DIR__.'/fixtures/data_extreme_last_row.xlsx');
 
         $max    = 5;
-        $reader = new SpreadsheetReader($file, null, null, null, $max);
+        $reader = new SpreadsheetReader($file, null, null, true, $max);
         $this->assertEquals($max, $reader->count());
     }
 

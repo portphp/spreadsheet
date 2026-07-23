@@ -1,44 +1,28 @@
 # portphp/spreadsheet
 
 [![Latest Version](https://img.shields.io/github/release/portphp/spreadsheet.svg?style=flat-square)](https://github.com/portphp/spreadsheet/releases)
-[![Build Status](https://travis-ci.org/portphp/spreadsheet.svg)](https://travis-ci.org/portphp/spreadsheet)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/portphp/spreadsheet/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/portphp/spreadsheet/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/portphp/spreadsheet/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/portphp/spreadsheet/?branch=master)
+[![CI](https://github.com/portphp/spreadsheet/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/portphp/spreadsheet/actions/workflows/test.yml)
+[![PHP Version](https://img.shields.io/packagist/php-v/portphp/spreadsheet.svg?style=flat-square)](https://packagist.org/packages/portphp/spreadsheet)
 
-[PhpSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet) reader and writer 
-for [Port](https://github.com/portphp).
+**Requirements:** PHP ^8.2 (tested on 8.2–8.5). Requires `portphp/portphp` ^2.0 and PhpSpreadsheet ^1.29 || ^2–^5.
+
+[PhpSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet) reader and writer for [Port](https://github.com/portphp).
+
+> Prefer this package over `portphp/excel` (PHPExcel, abandoned).
 
 ## Installation
-
-Open a command console, enter your project directory and execute the
-following command to download the latest stable version of this package:
 
 ```bash
 $ composer require portphp/spreadsheet
 ```
 
-This command requires you to have Composer installed globally, as explained
-in the [installation chapter](https://getcomposer.org/doc/00-intro.md)
-of the Composer documentation.
-
 ## Documentation
 
-Documentation is available at http://docs.portphp.org.
+Documentation is available at https://portphp.readthedocs.io.
 
 ## Issues and feature requests
 
 Please report issues and request features at https://github.com/portphp/portphp/issues.
-
-## Contributing
-
-Contributions are very welcome. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for
-details. Thanks to [everyone who has contributed](https://github.com/portphp/spreadsheet/graphs/contributors)
-already.
-
-## Security
-
-If you discover any security-related issues, please contact us at
-[security@portphp.org](mailto:security@portphp.org).
 
 ## License
 
