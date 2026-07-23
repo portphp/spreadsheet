@@ -24,6 +24,7 @@ SOFTWARE.
  */
 namespace Port\Spreadsheet;
 
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Port\Writer;
@@ -67,11 +68,11 @@ class SpreadsheetWriter implements Writer
 
     /**
      * @param \SplFileObject $file             File
-     * @param string         $sheet            Sheet title (optional)
+     * @param string|null    $sheet            Sheet title (optional)
      * @param string         $type             Spreadsheet file type (defaults to Xlsx)
      * @param bool           $prependHeaderRow
      */
-    public function __construct(\SplFileObject $file, $sheet = null, $type = 'Xlsx', $prependHeaderRow = false)
+    public function __construct(\SplFileObject $file, ?string $sheet = null, string $type = 'Xlsx', bool $prependHeaderRow = false)
     {
         $this->filename         = $file->getPathname();
         $this->sheet            = $sheet;
@@ -81,10 +82,8 @@ class SpreadsheetWriter implements Writer
 
     /**
      * Wrap up the writer after all items have been written
-     *
-     * @return void Any returned value is ignored.
      */
-    public function finish()
+    public function finish(): void
     {
         $writer = IOFactory::createWriter($this->spreadsheet, $this->type);
         $writer->save($this->filename);
@@ -92,10 +91,8 @@ class SpreadsheetWriter implements Writer
 
     /**
      * Prepare the writer before writing the items
-     *
-     * @return void Any returned value is ignored.
      */
-    public function prepare()
+    public function prepare(): void
     {
         $reader = IOFactory::createReader($this->type);
         if ($reader->canRead($this->filename)) {
@@ -116,10 +113,8 @@ class SpreadsheetWriter implements Writer
      * Write one data item
      *
      * @param array $item The data item with converted values
-     *
-     * @return void Any returned value is ignored.
      */
-    public function writeItem(array $item)
+    public function writeItem(array $item): void
     {
         $count = count($item);
 
@@ -127,7 +122,8 @@ class SpreadsheetWriter implements Writer
             $headers = array_keys($item);
 
             for ($i = 0; $i < $count; $i++) {
-                $this->spreadsheet->getActiveSheet()->setCellValueByColumnAndRow($i + 1, $this->row, $headers[$i]);
+                $col = Coordinate::stringFromColumnIndex($i + 1);
+                $this->spreadsheet->getActiveSheet()->setCellValue($col . $this->row, $headers[$i]);
             }
             $this->row++;
         }
@@ -135,7 +131,8 @@ class SpreadsheetWriter implements Writer
         $values = array_values($item);
 
         for ($i = 0; $i < $count; $i++) {
-            $this->spreadsheet->getActiveSheet()->setCellValueByColumnAndRow($i + 1, $this->row, $values[$i]);
+            $col = Coordinate::stringFromColumnIndex($i + 1);
+            $this->spreadsheet->getActiveSheet()->setCellValue($col . $this->row, $values[$i]);
         }
 
         $this->row++;

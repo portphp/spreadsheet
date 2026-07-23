@@ -29,12 +29,12 @@ use Port\Spreadsheet\SpreadsheetReaderFactory;
 /**
  * {@inheritDoc}
  */
-class SpreadsheetReaderFactoryTest extends \PHPUnit_Framework_TestCase
+class SpreadsheetReaderFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         if (!extension_loaded('zip')) {
             $this->markTestSkipped();

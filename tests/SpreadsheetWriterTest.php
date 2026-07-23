@@ -30,12 +30,12 @@ use Port\Spreadsheet\SpreadsheetWriter;
 /**
  * {@inheritDoc}
  */
-class SpreadsheetWriterTest extends \PHPUnit_Framework_TestCase
+class SpreadsheetWriterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         if (!extension_loaded('zip')) {
             $this->markTestSkipped();
@@ -50,7 +50,7 @@ class SpreadsheetWriterTest extends \PHPUnit_Framework_TestCase
      */
     public function testHeaderNotPrependedByDefault()
     {
-        $file = tempnam(sys_get_temp_dir(), null);
+        $file = tempnam(sys_get_temp_dir(), 'portphp');
 
         $writer = new SpreadsheetWriter(new \SplFileObject($file, 'w'), null, 'Xlsx');
         $writer->prepare();
@@ -77,7 +77,7 @@ class SpreadsheetWriterTest extends \PHPUnit_Framework_TestCase
      */
     public function testHeaderPrependedWhenOptionSetToTrue()
     {
-        $file = tempnam(sys_get_temp_dir(), null);
+        $file = tempnam(sys_get_temp_dir(), 'portphp');
 
         $writer = new SpreadsheetWriter(new \SplFileObject($file, 'w'), null, 'Xlsx', true);
         $writer->prepare();
@@ -103,7 +103,7 @@ class SpreadsheetWriterTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteItemAppendWithSheetTitle()
     {
-        $file = tempnam(sys_get_temp_dir(), null);
+        $file = tempnam(sys_get_temp_dir(), 'portphp');
 
         $writer = new SpreadsheetWriter(new \SplFileObject($file, 'w'), 'Sheet 1');
 
@@ -150,7 +150,8 @@ class SpreadsheetWriterTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteItemWithoutSheetTitle()
     {
-        $outputFile = new \SplFileObject(tempnam(sys_get_temp_dir(), null));
+        $path = tempnam(sys_get_temp_dir(), 'portphp');
+        $outputFile = new \SplFileObject($path);
         $writer     = new SpreadsheetWriter($outputFile);
 
         $writer->prepare();
@@ -158,5 +159,8 @@ class SpreadsheetWriterTest extends \PHPUnit_Framework_TestCase
         $writer->writeItem(array('first', 'last'));
 
         $writer->finish();
+
+        $this->assertFileExists($path);
+        $this->assertGreaterThan(0, filesize($path));
     }
 }
